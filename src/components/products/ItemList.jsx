@@ -5,7 +5,7 @@ export default function ItemList({ productos, filtro, onFiltroChange, categorias
   return (
     <section className="ilc">
       <div className="ilc__hero">
-        <p className="ilc__season">Automne — Hiver 2026</p>
+        <p className="ilc__season">Otoño — Invierno 2026</p>
         <h1 className="ilc__title">La Colección</h1>
         <p className="ilc__subtitle">{productos.length} piezas. Una visión.</p>
       </div>

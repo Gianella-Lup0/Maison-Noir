@@ -15,7 +15,7 @@ export default function Home() {
           <div className="home__hero-overlay" />
         </div>
         <div className="home__hero-content">
-          <p className="home__hero-pre">Automne — Hiver 2026</p>
+          <p className="home__hero-pre">Otoño — Invierno 2026</p>
           <h1 className="home__hero-title">
             L'élégance<br />
             <em>est une attitude</em>
@@ -67,13 +67,8 @@ export default function Home() {
           <div className="home__img-wrap home__img-wrap--tall">
             <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80" alt="Editorial 1" />
           </div>
-          <div className="home__img-wrap home__img-wrap--short">
-            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80" alt="Editorial 2" />
-          </div>
         </div>
       </section>
-
-      {/* Quote band */}
       <section className="home__quote">
         <blockquote className="home__quote-text">
           "La moda no es solo ropa. La moda es algo en el aire."

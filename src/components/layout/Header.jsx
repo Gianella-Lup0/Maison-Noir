@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header__top">
-        <span className="header__tagline">Automne — Hiver 2026</span>
+        <span className="header__tagline">Otoño — Invierno 2026</span>
         <Link to="/" className="header__logo">
           MAISON NOIR
         </Link>

@@ -55,7 +55,7 @@ export default function Footer() {
           <span>Showroom</span>
           <span>Careers</span>
         </div>
-        <p className="footer__copy">© 2026 Maison Noir. Tous droits réservés.</p>
+        <p className="footer__copy">© 2026 Maison Noir. Todos los derechos reservados.</p>
       </div>
     </footer>
   );
