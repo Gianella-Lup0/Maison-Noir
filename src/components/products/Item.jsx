@@ -4,6 +4,12 @@ import './Item.css';
 export default function Item({ producto }) {
   const { id, nombre, precio, categoria, imagen, coleccion } = producto;
 
+  const precioFormateado = precio.toLocaleString('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    maximumFractionDigits: 0,
+  });
+
   return (
     <Link to={`/producto/${id}`} className="item-card">
       <div className="item-card__image-wrap">
@@ -16,7 +22,7 @@ export default function Item({ producto }) {
       <div className="item-card__info">
         <p className="item-card__categoria">{categoria}</p>
         <h3 className="item-card__nombre">{nombre}</h3>
-        <p className="item-card__precio">USD {precio.toLocaleString()}</p>
+        <p className="item-card__precio">{precioFormateado}</p>
       </div>
     </Link>
   );

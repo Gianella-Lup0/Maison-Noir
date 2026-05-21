@@ -2,6 +2,13 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import './Carrito.css';
 
+const formatARS = (valor) =>
+  valor.toLocaleString('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    maximumFractionDigits: 0,
+  });
+
 export default function Carrito() {
   const { cartItems, removeFromCart, updateCantidad, totalPrecio, totalItems } = useCart();
 
@@ -39,7 +46,7 @@ export default function Carrito() {
               <div className="carrito__item-info">
                 <p className="carrito__item-cat">{item.categoria}</p>
                 <h3 className="carrito__item-name">{item.nombre}</h3>
-                <p className="carrito__item-price">USD {item.precio.toLocaleString()}</p>
+                <p className="carrito__item-price">{formatARS(item.precio)}</p>
                 <div className="carrito__item-qty">
                   <button
                     className="qty-btn"
@@ -54,7 +61,7 @@ export default function Carrito() {
               </div>
               <div className="carrito__item-right">
                 <p className="carrito__item-subtotal">
-                  USD {(item.precio * item.cantidad).toLocaleString()}
+                  {formatARS(item.precio * item.cantidad)}
                 </p>
                 <button
                   className="carrito__remove"
@@ -75,7 +82,7 @@ export default function Carrito() {
             {cartItems.map(item => (
               <div className="carrito__summary-row" key={item.id}>
                 <span>{item.nombre} ×{item.cantidad}</span>
-                <span>USD {(item.precio * item.cantidad).toLocaleString()}</span>
+                <span>{formatARS(item.precio * item.cantidad)}</span>
               </div>
             ))}
           </div>
@@ -84,7 +91,7 @@ export default function Carrito() {
 
           <div className="carrito__summary-total">
             <span>Total</span>
-            <span>USD {totalPrecio.toLocaleString()}</span>
+            <span>{formatARS(totalPrecio)}</span>
           </div>
 
           <button className="carrito__checkout">

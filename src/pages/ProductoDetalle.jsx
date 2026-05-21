@@ -44,6 +44,12 @@ export default function ProductoDetalle() {
     );
   }
 
+  const precioFormateado = producto.precio.toLocaleString('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    maximumFractionDigits: 0,
+  });
+
   return (
     <div className="pd">
       <button className="pd__back" onClick={() => navigate(-1)}>
@@ -61,7 +67,7 @@ export default function ProductoDetalle() {
         <div className="pd__info-col">
           <p className="pd__categoria">{producto.categoria}</p>
           <h1 className="pd__nombre">{producto.nombre}</h1>
-          <p className="pd__precio">USD {producto.precio.toLocaleString()}</p>
+          <p className="pd__precio">{precioFormateado}</p>
 
           <div className="pd__divider" />
 
@@ -92,7 +98,7 @@ export default function ProductoDetalle() {
             {agregado ? '✓ Agregado al carrito' : 'Agregar al carrito'}
           </button>
 
-          <p className="pd__envio">Envío gratuito en compras superiores a USD 500 · Devolución en 30 días</p>
+          <p className="pd__envio">Envío gratuito en compras superiores a $500.000 · Devolución en 30 días</p>
         </div>
       </div>
     </div>
