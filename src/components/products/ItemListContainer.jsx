@@ -1,31 +1,30 @@
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import ItemList from './ItemList'
 import './ItemListContainer.css'
 
 export default function ItemListContainer() {
-  const [todosLosProductos, setTodosLosProductos] = useState([])
+  const { categoriaId } = useParams()
+  const [productos, setProductos] = useState([])
   const [loading, setLoading] = useState(true)
-  const [filtro, setFiltro] = useState('Todos')
 
-  // Carga de datos desde JSON local con useEffect + fetch
   useEffect(() => {
     fetch('/productos.json')
       .then(res => res.json())
       .then(data => {
-        setTodosLosProductos(data)
+        // El filtro se aplica sobre la respuesta del fetch,
+        // simulando lo que haría un endpoint de backend con parámetro de categoría
+        const resultado = categoriaId
+          ? data.filter(p => p.categoria === categoriaId)
+          : data
+        setProductos(resultado)
         setLoading(false)
       })
       .catch(err => {
         console.error('Error cargando productos:', err)
         setLoading(false)
       })
-  }, [])
-
-  // Lógica de filtrado — se queda en el Container
-  const categorias = ['Todos', ...new Set(todosLosProductos.map(p => p.categoria))]
-  const productosFiltrados = filtro === 'Todos'
-    ? todosLosProductos
-    : todosLosProductos.filter(p => p.categoria === filtro)
+  }, [categoriaId]) // se re-ejecuta cada vez que cambia la categoría en la URL
 
   if (loading) {
     return (
@@ -36,13 +35,10 @@ export default function ItemListContainer() {
     )
   }
 
-  // ItemListContainer delega el render a ItemList
   return (
     <ItemList
-      productos={productosFiltrados}
-      filtro={filtro}
-      onFiltroChange={setFiltro}
-      categorias={categorias}
+      productos={productos}
+      categoriaActiva={categoriaId || 'Todos'}
     />
   )
 }

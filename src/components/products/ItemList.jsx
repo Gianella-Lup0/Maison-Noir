@@ -1,7 +1,10 @@
+import { Link } from 'react-router-dom'
 import Item from './Item'
 import './ItemList.css'
 
-export default function ItemList({ productos, filtro, onFiltroChange, categorias }) {
+const CATEGORIAS = ['Todos', 'Abrigos', 'Vestidos', 'Sacos', 'Pantalones', 'Tops', 'Faldas', 'Conjuntos']
+
+export default function ItemList({ productos, categoriaActiva }) {
   return (
     <section className="ilc">
       <div className="ilc__hero">
@@ -11,14 +14,14 @@ export default function ItemList({ productos, filtro, onFiltroChange, categorias
       </div>
 
       <div className="ilc__filters">
-        {categorias.map(cat => (
-          <button
+        {CATEGORIAS.map(cat => (
+          <Link
             key={cat}
-            className={`ilc__filter ${filtro === cat ? 'active' : ''}`}
-            onClick={() => onFiltroChange(cat)}
+            to={cat === 'Todos' ? '/productos' : `/productos/${cat}`}
+            className={`ilc__filter ${categoriaActiva === cat ? 'active' : ''}`}
           >
             {cat}
-          </button>
+          </Link>
         ))}
       </div>
 

@@ -25,10 +25,6 @@ export default function Home() {
             Explorar Colección
           </Link>
         </div>
-        <div className="home__hero-scroll">
-          <span>Scroll</span>
-          <div className="home__scroll-line" />
-        </div>
       </section>
 
       {/* Editorial strip */}
