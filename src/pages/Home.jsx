@@ -1,19 +1,56 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
+const HERO_IMAGES = [
+  {
+    src: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1400&q=80',
+    alt: 'Maison Noir Collection'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1400&q=80',
+    alt: 'Maison Noir Editorial'
+  }
+];
+
 export default function Home() {
+  const [imagenActiva, setImagenActiva] = useState(0);
+
+  useEffect(() => {
+    const intervalo = setInterval(() => {
+      setImagenActiva(prev => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(intervalo);
+  }, []);
+
   return (
     <div className="home">
       {/* Hero */}
       <section className="home__hero">
         <div className="home__hero-bg">
-          <img
-            src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1400&q=80"
-            alt="Maison Noir Collection"
-            className="home__hero-img"
-          />
+          {HERO_IMAGES.map((img, i) => (
+            <img
+              key={i}
+              src={img.src}
+              alt={img.alt}
+              className={`home__hero-img ${imagenActiva === i ? 'active' : ''}`}
+            />
+          ))}
           <div className="home__hero-overlay" />
+
+          {/* Indicadores */}
+          <div className="home__hero-dots">
+            {HERO_IMAGES.map((_, i) => (
+              <button
+                key={i}
+                className={`home__hero-dot ${imagenActiva === i ? 'active' : ''}`}
+                onClick={() => setImagenActiva(i)}
+                aria-label={`Imagen ${i + 1}`}
+              />
+            ))}
+          </div>
         </div>
+
         <div className="home__hero-content">
           <p className="home__hero-pre">Otoño — Invierno 2026</p>
           <h1 className="home__hero-title">
@@ -65,6 +102,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       <section className="home__quote">
         <blockquote className="home__quote-text">
           "La moda no es solo ropa. La moda es algo en el aire."
