@@ -1,56 +1,19 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
-const HERO_IMAGES = [
-  {
-    src: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1400&q=80',
-    alt: 'Maison Noir Collection'
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1400&q=80',
-    alt: 'Maison Noir Editorial'
-  }
-];
-
 export default function Home() {
-  const [imagenActiva, setImagenActiva] = useState(0);
-
-  useEffect(() => {
-    const intervalo = setInterval(() => {
-      setImagenActiva(prev => (prev + 1) % HERO_IMAGES.length);
-    }, 5000);
-    return () => clearInterval(intervalo);
-  }, []);
-
   return (
     <div className="home">
       {/* Hero */}
       <section className="home__hero">
         <div className="home__hero-bg">
-          {HERO_IMAGES.map((img, i) => (
-            <img
-              key={i}
-              src={img.src}
-              alt={img.alt}
-              className={`home__hero-img ${imagenActiva === i ? 'active' : ''}`}
-            />
-          ))}
+          <img
+            src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1400&q=80"
+            alt="Maison Noir Collection"
+            className="home__hero-img"
+          />
           <div className="home__hero-overlay" />
-
-          {/* Indicadores */}
-          <div className="home__hero-dots">
-            {HERO_IMAGES.map((_, i) => (
-              <button
-                key={i}
-                className={`home__hero-dot ${imagenActiva === i ? 'active' : ''}`}
-                onClick={() => setImagenActiva(i)}
-                aria-label={`Imagen ${i + 1}`}
-              />
-            ))}
-          </div>
         </div>
-
         <div className="home__hero-content">
           <p className="home__hero-pre">Otoño — Invierno 2026</p>
           <h1 className="home__hero-title">
@@ -82,7 +45,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured grid */}
+      {/* Featured grid con collage */}
       <section className="home__featured">
         <div className="home__featured-text">
           <p className="home__label">La Filosofía</p>
@@ -96,9 +59,19 @@ export default function Home() {
             Ver toda la colección →
           </Link>
         </div>
-        <div className="home__featured-images">
-          <div className="home__img-wrap home__img-wrap--tall">
-            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80" alt="Editorial 1" />
+
+        <div className="home__collage">
+          <div className="home__collage-item">
+            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&q=80" alt="Colección 1" />
+          </div>
+          <div className="home__collage-item">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80" alt="Colección 2" />
+          </div>
+          <div className="home__collage-item">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80" alt="Colección 3" />
+          </div>
+          <div className="home__collage-item">
+            <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&q=80" alt="Colección 4" />
           </div>
         </div>
       </section>

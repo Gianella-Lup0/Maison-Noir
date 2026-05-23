@@ -14,22 +14,14 @@
 }
 
 .home__hero-img {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transition: opacity 1.2s ease;
-}
-
-.home__hero-img.active {
-  opacity: 1;
-  animation: slowZoom 8s ease-out both;
+  animation: slowZoom 12s ease-out both;
 }
 
 @keyframes slowZoom {
-  from { transform: scale(1.06); }
+  from { transform: scale(1.08); }
   to { transform: scale(1); }
 }
 
@@ -42,33 +34,6 @@
     rgba(10,10,10,0.3) 50%,
     rgba(10,10,10,0.1) 100%
   );
-  z-index: 1;
-}
-
-/* Dots */
-.home__hero-dots {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.6rem;
-  z-index: 3;
-}
-
-.home__hero-dot {
-  width: 24px;
-  height: 2px;
-  background: rgba(255,255,255,0.35);
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease, width 0.3s ease;
-  padding: 0;
-}
-
-.home__hero-dot.active {
-  background: var(--or);
-  width: 40px;
 }
 
 .home__hero-content {
@@ -129,21 +94,6 @@
   transform: translateY(-2px);
 }
 
-.home__hero-scroll {
-  position: absolute;
-  bottom: 3rem;
-  right: 3rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  z-index: 2;
-  color: var(--gris-clair);
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  writing-mode: vertical-rl;
-}
-
 /* STRIP */
 .home__strip {
   display: flex;
@@ -185,7 +135,6 @@
 .home__featured {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  gap: 0;
   min-height: 80vh;
 }
 
@@ -237,29 +186,30 @@
   color: var(--or);
 }
 
-.home__featured-images {
+/* COLLAGE */
+.home__collage {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px;
   background: var(--gris-clair);
 }
 
-.home__img-wrap {
+.home__collage-item {
   overflow: hidden;
+  background: var(--creme);
 }
 
-.home__img-wrap img {
+.home__collage-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.7s ease;
+  display: block;
 }
 
-.home__img-wrap:hover img {
-  transform: scale(1.04);
-}
-
-.home__img-wrap--tall {
-  grid-row: span 2;
+.home__collage-item:hover img {
+  transform: scale(1.06);
 }
 
 /* QUOTE */
@@ -293,5 +243,5 @@
   .home__strip-text { display: none; }
   .home__featured { grid-template-columns: 1fr; }
   .home__featured-text { padding: 3rem 1.5rem; }
-  .home__featured-images { min-height: 50vw; }
+  .home__collage { min-height: 60vw; }
 }
