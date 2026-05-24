@@ -1,9 +1,9 @@
-import { Link, useLocation } from 'react-router-dom';
-import CartWidget from '../cart/CartWidget';
-import './Header.css';
+import { Link, useLocation } from 'react-router-dom'
+import CartWidget from '../cart/CartWidget'
+import './Header.css'
 
 export default function Header() {
-  const location = useLocation();
+  const location = useLocation()
 
   return (
     <header className="header">
@@ -18,7 +18,8 @@ export default function Header() {
         <Link to="/" className={`nav__link ${location.pathname === '/' ? 'active' : ''}`}>Inicio</Link>
         <Link to="/productos" className={`nav__link ${location.pathname.startsWith('/producto') ? 'active' : ''}`}>Colección</Link>
         <Link to="/carrito" className={`nav__link ${location.pathname === '/carrito' ? 'active' : ''}`}>Carrito</Link>
+        <Link to="/admin/cupones" className={`nav__link nav__link--admin ${location.pathname.startsWith('/admin') ? 'active' : ''}`}>Admin</Link>
       </nav>
     </header>
-  );
+  )
 }

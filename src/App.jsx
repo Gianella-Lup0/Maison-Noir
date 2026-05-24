@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Productos from './pages/Productos'
 import ProductoDetalle from './pages/ProductoDetalle'
 import Carrito from './pages/Carrito'
+import GestionCupones from './pages/GestionCupones'
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
             <Route path="/productos/:categoriaId" element={<Productos />} />
             <Route path="/producto/:id" element={<ProductoDetalle />} />
             <Route path="/carrito" element={<Carrito />} />
+            <Route path="/admin/cupones" element={<GestionCupones />} />
           </Routes>
         </Layout>
       </CartProvider>

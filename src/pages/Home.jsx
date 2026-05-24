@@ -45,6 +45,8 @@ export default function Home() {
         </div>
       </section>
 
+{/*  */}
+
       {/* Featured grid con collage */}
       <section className="home__featured">
         <div className="home__featured-text">
