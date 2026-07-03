@@ -1,11 +1,9 @@
 # Maison Noir - E-Commerce
-
 Maison Noir es una plataforma de comercio electrónico de indumentaria urbana y minimalista. Desarrollada como una Single Page Application (SPA), ofrece una experiencia de usuario rápida, fluida y completamente responsiva.
 
 El proyecto incluye un catálogo público con filtros en tiempo real, carrito de compras y un panel de administración privado protegido por autenticación para la gestión del inventario.
 
 ## 🚀 Tecnologías Utilizadas
-
 El proyecto está construido con un stack moderno de desarrollo frontend y Backend-as-a-Service (BaaS):
 
 *   **Core:** React.js (inicializado con Vite)
