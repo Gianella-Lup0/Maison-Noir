@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async'; // <-- SEO
 import styled from 'styled-components'; // <-- STYLED COMPONENTS
 import { FaEdit, FaTrash, FaPlus, FaSave, FaBan, FaBoxOpen } from 'react-icons/fa'; // <-- ICONS
 import { db } from '../firebase/config';
+import { Container, Row, Col, Form, Button, Alert, Card, Table, Modal } from 'react-bootstrap';
 import { 
   collection, 
   addDoc, 
@@ -11,7 +12,6 @@ import {
   updateDoc, 
   onSnapshot 
 } from 'firebase/firestore';
-import { Container, Row, Col, Form, Button, Alert, Card, Table } from 'react-bootstrap';
 
 // ==========================================
 //        COMPONENTES ESTILIZADOS (CSS)
@@ -66,6 +66,7 @@ const MiniaturaImagen = styled.img`
 // ==========================================
 //          COMPONENTE PRINCIPAL
 // ==========================================
+
 export default function AdminProductos() {
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
@@ -81,6 +82,10 @@ export default function AdminProductos() {
   const [error, setError] = useState('');
   const [exito, setExito] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // --- ESTADOS PARA EL MODAL DE ELIMINACIÓN ---
+  const [showModal, setShowModal] = useState(false);
+  const [productoAEliminar, setProductoAEliminar] = useState(null);
 
   // READ: Firebase real-time
   useEffect(() => {
@@ -136,17 +141,24 @@ export default function AdminProductos() {
     }
   };
 
-  // DELETE
-  const handleEliminar = async (id, nombreProd) => {
-    const confirmar = window.confirm(`¿Estás seguro de eliminar "${nombreProd}"?`);
-    if (!confirmar) return;
+  // --- LÓGICA DE ELIMINACIÓN CON MODAL ---
+  const abrirModalEliminar = (producto) => {
+    setProductoAEliminar(producto);
+    setShowModal(true);
+  };
+
+  const confirmarEliminacion = async () => {
+    if (!productoAEliminar) return;
 
     try {
-      await deleteDoc(doc(db, 'productos', id));
+      await deleteDoc(doc(db, 'productos', productoAEliminar.id));
       setExito('Producto eliminado correctamente.');
-      if (editId === id) cancelarEdicion();
+      if (editId === productoAEliminar.id) cancelarEdicion();
     } catch (err) {
       setError('No se pudo eliminar el producto.');
+    } finally {
+      setShowModal(false);
+      setProductoAEliminar(null);
     }
   };
 
@@ -299,7 +311,7 @@ export default function AdminProductos() {
                           </BotonIcono>
                           <BotonIcono 
                             variant="danger" 
-                            onClick={() => handleEliminar(prod.id, prod.nombre)}
+                            onClick={() => abrirModalEliminar(prod)}
                             title="Eliminar producto"
                           >
                             <FaTrash />
@@ -314,6 +326,25 @@ export default function AdminProductos() {
           </TarjetaPremium>
         </Col>
       </Row>
+
+      {/* --- MODAL DE CONFIRMACIÓN DE ELIMINACIÓN --- */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmar Eliminación</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          ¿Estás seguro de que deseas eliminar el producto <strong>"{productoAEliminar?.nombre}"</strong>? Esta acción no se puede deshacer.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Cancelar
+          </Button>
+          <Button variant="danger" onClick={confirmarEliminacion}>
+            Sí, Eliminar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
     </SeccionAdmin>
   );
 }
